@@ -1,0 +1,536 @@
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香水瓶造型喜好调查</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B9B',
+                        secondary: '#FFA6C9',
+                        accent: '#FFD1DC',
+                        dark: '#333333',
+                        light: '#F9F9F9'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+/* 由于 @apply 是 Tailwind CSS 的指令，未知 @apply 规则可能是环境配置问题，
+   这里将 @apply 展开为原生 CSS 实现相同效果 */
+transition: all 300ms;
+box-shadow: 0 0 #0000; /* 初始化阴影 */
+transform: translateY(0); /* 初始化位移 */
+}
+.card-hover:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-0.25rem);
+            }
+            .btn-primary {
+                background-color: #FF6B9B; /* 对应 bg-primary */
+                transition: all 300ms; /* 对应 transition-all duration-300 */
+                color: white; /* 对应 text-white */
+                font-weight: 500; /* 对应 font-medium */
+                padding-top: 0.75rem; /* 对应 py-3 */
+                padding-bottom: 0.75rem; /* 对应 py-3 */
+                padding-left: 1.5rem; /* 对应 px-6 */
+                padding-right: 1.5rem; /* 对应 px-6 */
+                border-radius: 9999px; /* 对应 rounded-full */
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* 对应 shadow-md */
+                transform: translateY(0); /* 初始化 transform */
+            }
+            .btn-primary:hover {
+                background-color: rgba(255, 107, 155, 0.9); /* 对应 hover:bg-primary/90 */
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* 对应 hover:shadow-lg */
+                transform: translateY(-0.125rem); /* 对应 hover:-translate-y-0.5 */
+            }
+            }
+            .progress-bar {
+/* 由于 @apply 是 Tailwind CSS 的指令，未知 @apply 规则可能是环境配置问题，
+   这里将 @apply 展开为原生 CSS 实现相同效果 */
+height: 0.5rem; /* 对应 h-2 */
+background-color: #FFD1DC; /* 对应 bg-accent */
+border-radius: 9999px; /* 对应 rounded-full */
+overflow: hidden; /* 对应 overflow-hidden */
+            }
+            .progress-value {
+/* 由于 @apply 是 Tailwind CSS 的指令，未知 @apply 规则可能是环境配置问题，
+   这里将 @apply 展开为原生 CSS 实现相同效果 */
+height: 100%; /* 对应 h-full */
+background-color: #FF6B9B; /* 对应 bg-primary */
+border-radius: 9999px; /* 对应 rounded-full */
+transition: all 500ms ease-out; /* 对应 transition-all duration-500 ease-out */
+            }
+        /* 这里可以添加新的 @ 规则或选择器，由于指令不明确，暂时添加一个简单的示例 */
+        @media (max-width: 768px) {
+            .btn-primary {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-light to-accent min-h-screen font-sans text-dark">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- 头部 -->
+        <header class="text-center mb-10">
+            <div class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg">
+                <h1 class="text-[clamp(1.8rem,5vw,2.8rem)] font-bold text-primary mb-4">香水瓶造型喜好调查</h1>
+                <p class="text-lg text-dark/80 mb-6">感谢您参与我们的调查，帮助我们了解女性对香水瓶造型的喜好！</p>
+                <div class="progress-bar">
+                    <div id="progress-bar-value" class="progress-value" style="width: 0%"></div>
+                </div>
+                <p class="text-sm text-dark/60 mt-2" id="progress-text">进度：0/10</p>
+            </div>
+        </header>
+        
+        <!-- 主要内容区 -->
+        <main>
+            <!-- 欢迎页面 -->
+            <div id="welcome-page" class="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg text-center">
+                <img src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/d3d6153de2c8427a99bec0bc82f6944f~tplv-a9rns2rl98-image.image?rk3s=8e244e95&amp;x-expires=1749804497&amp;x-signature=dt79uClREjtR8jX3drlyx%2BbnwH0%3D" alt="精美的香水瓶" class="w-full h-48 object-cover rounded-xl mb-6">
+                <h2 class="text-2xl font-bold mb-4">欢迎参与我们的调查</h2>
+                <p class="text-lg mb-8">本次调查旨在了解女性对香水瓶造型的喜好，以便我们推出更受欢迎的香水产品。</p>
+                <button id="start-survey" class="btn-primary">
+                    <i class="fa fa-paper-plane mr-2"></i>开始调查
+                </button>
+            </div>
+            
+            <!-- 问题容器 -->
+            <div id="questions-container" class="space-y-8 hidden">
+                <!-- 问题将通过JavaScript动态生成 -->
+            </div>
+            
+            <!-- 结果页面 -->
+            <div id="results-page" class="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hidden">
+                <h2 class="text-2xl font-bold text-center mb-8">调查结果</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-light p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">您的选择偏好</h3>
+                        <div id="user-results" class="space-y-4">
+                            <!-- 用户结果将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <div class="bg-light p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">整体调查结果</h3>
+                        <div id="overall-results" class="space-y-4">
+                            <!-- 整体结果将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="restart-survey" class="btn-primary">
+                        <i class="fa fa-refresh mr-2"></i>重新开始
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <!-- 页脚 -->
+        <footer class="mt-12 text-center text-dark/60 text-sm">
+            <p>© 2025 香水瓶设计团队. 感谢您的参与!</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 模拟香水瓶图片数据
+        const bottleImages = [
+            { id: 1, name: "A1", url: "https://uy.wzznft.com/i/2025/06/06/sig0xk.jpg", description: "根据喜好选择" },
+            { id: 2, name: "A2", url: "https://uy.wzznft.com/i/2025/06/06/sig0zr.jpg", description: "根据喜好选择" },
+            { id: 3, name: "A3", url: "https://uy.wzznft.com/i/2025/06/06/sig0pj.jpg", description: "根据喜好选择" },
+            { id: 4, name: "A4", url: "https://uy.wzznft.com/i/2025/06/06/sig9hi.jpg", description: "根据喜好选择" },
+            { id: 5, name: "A5", url: "https://uy.wzznft.com/i/2025/06/06/sigctp.jpg", description: "根据喜好选择" },
+            { id: 6, name: "A6", url: "https://uy.wzznft.com/i/2025/06/06/sigcbg.jpg", description: "根据喜好选择" },
+            { id: 7, name: "A7", url: "https://uy.wzznft.com/i/2025/06/06/sigcw1.jpg", description: "根据喜好选择" },
+            { id: 8, name: "A8", url: "https://uy.wzznft.com/i/2025/06/06/sig7dp.jpg", description: "根据喜好选择" },
+            { id: 9, name: "A9", url: "https://uy.wzznft.com/i/2025/06/06/sig76p.jpg", description: "根据喜好选择" },
+            { id: 10, name: "A10", url: "https://uy.wzznft.com/i/2025/06/06/sig8tp.jpg", description: "根据喜好选择" },
+            { id: 11, name: "A11", url: "https://uy.wzznft.com/i/2025/06/06/snw161.jpg", description: "根据喜好选择" },
+            { id: 12, name: "A12", url: "https://uy.wzznft.com/i/2025/06/06/snvz04.jpg", description: "根据喜好选择" },
+            { id: 13, name: "A13", url: "https://uy.wzznft.com/i/2025/06/06/snw1ln.jpg", description: "根据喜好选择" },
+            { id: 14, name: "A14", url: "https://uy.wzznft.com/i/2025/06/06/snvy6l.jpg", description: "根据喜好选择" },
+            { id: 15, name: "A15", url: "https://uy.wzznft.com/i/2025/06/06/snw3bu.jpg", description: "根据喜好选择" },
+            { id: 16, name: "A16", url: "https://uy.wzznft.com/i/2025/06/06/snw6wy.jpg", description: "根据喜好选择" },
+            { id: 17, name: "A17", url: "https://uy.wzznft.com/i/2025/06/06/snw31y.jpg", description: "根据喜好选择" },
+            { id: 18, name: "A18", url: "https://uy.wzznft.com/i/2025/06/06/snw72n.png", description: "根据喜好选择" },
+            { id: 19, name: "A19", url: "https://uy.wzznft.com/i/2025/06/06/snw39i.png", description: "根据喜好选择" },
+            { id: 20, name: "A20", url: "https://uy.wzznft.com/i/2025/06/06/snw41b.png", description: "根据喜好选择" },
+            { id: 21, name: "A21", url: "https://uy.wzznft.com/i/2025/06/06/srdh3d.png", description: "根据喜好选择" },
+            { id: 22, name: "A22", url: "https://uy.wzznft.com/i/2025/06/06/srdkf8.png", description: "根据喜好选择" },
+            { id: 23, name: "A23", url: "https://uy.wzznft.com/i/2025/06/06/srdni3.png", description: "根据喜好选择" },
+            { id: 24, name: "A24", url: "https://uy.wzznft.com/i/2025/06/06/srdmxy.png", description: "根据喜好选择" },
+            { id: 25, name: "A25", url: "https://uy.wzznft.com/i/2025/06/06/srdmrx.png", description: "根据喜好选择" },
+            { id: 26, name: "A26", url: "https://uy.wzznft.com/i/2025/06/06/srdsg3.jpg", description: "根据喜好选择" },
+        ];
+        
+        // 全局变量
+        let currentQuestion = 0;
+        let selectedBottles = [];
+        let surveyResults = {};
+        
+        // DOM 元素
+        const welcomePage = document.getElementById('welcome-page');
+        const questionsContainer = document.getElementById('questions-container');
+        const resultsPage = document.getElementById('results-page');
+        const startSurveyBtn = document.getElementById('start-survey');
+        const restartSurveyBtn = document.getElementById('restart-survey');
+        const progressBarValue = document.getElementById('progress-bar-value');
+        const progressText = document.getElementById('progress-text');
+        
+        // 初始化调查
+        function initSurvey() {
+            // 从本地存储加载结果（如果有）
+            loadResults();
+            
+            // 为开始调查按钮添加事件监听器
+            startSurveyBtn.addEventListener('click', startSurvey);
+            restartSurveyBtn.addEventListener('click', restartSurvey);
+        }
+        
+        // 开始调查
+        function startSurvey() {
+            welcomePage.classList.add('hidden');
+            questionsContainer.classList.remove('hidden');
+            
+            // 生成第一个问题
+            generateQuestion(0);
+            updateProgress();
+        }
+        
+        // 生成问题
+        function generateQuestion(index) {
+            // 清空问题容器
+            questionsContainer.innerHTML = '';
+            
+            // 如果已经完成所有问题，显示结果
+            if (index >= 10) {
+                showResults();
+                return;
+            }
+            
+            // 随机选择两个瓶子
+            let bottleA, bottleB;
+            
+            if (index === 0) {
+                // 第一个问题随机选择两个瓶子
+                bottleA = getRandomBottle();
+                bottleB = getRandomBottle([bottleA.id]);
+                
+                // 保存初始选择
+                selectedBottles[index] = {
+                    a: bottleA,
+                    b: bottleB
+                };
+            } else {
+                // 根据上一个问题的选择，保留一个选项并提供一个新选项
+                const prevChoice = localStorage.getItem(`question_${index-1}`);
+                const prevBottles = selectedBottles[index-1];
+                
+                if (prevChoice === 'a') {
+                    bottleA = prevBottles.a;
+                    bottleB = getRandomBottle([bottleA.id, prevBottles.b.id]);
+                } else {
+                    bottleB = prevBottles.b;
+                    bottleA = getRandomBottle([bottleB.id, prevBottles.a.id]);
+                }
+                
+                // 保存当前选择
+                selectedBottles[index] = {
+                    a: bottleA,
+                    b: bottleB
+                };
+            }
+            
+            // 创建问题卡片
+            const questionCard = document.createElement('div');
+            questionCard.className = 'bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg';
+            
+            questionCard.innerHTML = `
+                <h2 class="text-xl font-bold mb-6">问题 ${index + 1}: 请选择您更喜欢的香水瓶造型</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div id="option-a" class="bottle-option card-hover bg-light rounded-xl overflow-hidden shadow-md border-2 border-transparent">
+                        <img src="${bottleA.url}" alt="${bottleA.name}" class="w-full h-80 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-1">A. ${bottleA.name}</h3>
+                            <p class="text-dark/70 text-sm">${bottleA.description}</p>
+                        </div>
+                    </div>
+                    
+                    <div id="option-b" class="bottle-option card-hover bg-light rounded-xl overflow-hidden shadow-md border-2 border-transparent">
+                        <img src="${bottleB.url}" alt="${bottleB.name}" class="w-full h-80 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg mb-1">B. ${bottleB.name}</h3>
+                            <p class="text-dark/70 text-sm">${bottleB.description}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                    <button id="prev-btn" class="px-6 py-3 bg-white text-primary border border-primary rounded-full transition-all duration-300 hover:bg-primary/10 ${index === 0 ? 'opacity-50 cursor-not-allowed' : ''}">
+                        <i class="fa fa-arrow-left mr-2"></i>上一题
+                    </button>
+                    
+                    <button id="next-btn" class="btn-primary opacity-50 cursor-not-allowed" disabled>
+                        下一题<i class="fa fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            `;
+            
+            questionsContainer.appendChild(questionCard);
+            
+            // 添加选项点击事件
+            const optionA = document.getElementById('option-a');
+            const optionB = document.getElementById('option-b');
+            const nextBtn = document.getElementById('next-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            
+            let selectedOption = null;
+            
+            optionA.addEventListener('click', () => {
+                selectOption('a', optionA, optionB, nextBtn);
+                selectedOption = 'a';
+            });
+            
+            optionB.addEventListener('click', () => {
+                selectOption('b', optionB, optionA, nextBtn);
+                selectedOption = 'b';
+            });
+            
+            // 下一题按钮事件
+            nextBtn.addEventListener('click', () => {
+                // 保存当前选择
+                localStorage.setItem(`question_${index}`, selectedOption);
+                
+                // 更新结果统计
+                updateResult(selectedOption === 'a' ? bottleA.id : bottleB.id);
+                
+                // 移动到下一个问题
+                currentQuestion++;
+                generateQuestion(currentQuestion);
+                updateProgress();
+            });
+            
+            // 上一题按钮事件
+            prevBtn.addEventListener('click', () => {
+                if (index > 0) {
+                    currentQuestion--;
+                    generateQuestion(currentQuestion);
+                    updateProgress();
+                }
+            });
+            
+            // 检查是否已有选择
+            const savedChoice = localStorage.getItem(`question_${index}`);
+            if (savedChoice) {
+                if (savedChoice === 'a') {
+                    selectOption('a', optionA, optionB, nextBtn);
+                } else {
+                    selectOption('b', optionB, optionA, nextBtn);
+                }
+            }
+        }
+        
+        // 选择选项
+        function selectOption(option, selectedEl, otherEl, nextBtn) {
+            // 重置所有选项样式
+            selectedEl.classList.remove('border-primary', 'bg-primary/5');
+            otherEl.classList.remove('border-primary', 'bg-primary/5');
+            
+            // 设置选中样式
+            selectedEl.classList.add('border-primary', 'bg-primary/5');
+            
+            // 启用下一步按钮
+            nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            nextBtn.disabled = false;
+        }
+        
+        // 获取随机瓶子
+        function getRandomBottle(excludeIds = []) {
+            let availableBottles = bottleImages.filter(bottle => !excludeIds.includes(bottle.id));
+            return availableBottles[Math.floor(Math.random() * availableBottles.length)];
+        }
+        
+        // 更新进度条
+        function updateProgress() {
+            const progress = ((currentQuestion) / 10) * 100;
+            progressBarValue.style.width = `${progress}%`;
+            progressText.textContent = `进度：${currentQuestion}/10`;
+        }
+        
+        // 更新结果统计
+        function updateResult(bottleId) {
+            // 从本地存储加载结果
+            const savedResults = localStorage.getItem('surveyResults');
+            surveyResults = savedResults ? JSON.parse(savedResults) : {};
+            
+            // 更新结果
+            if (surveyResults[bottleId]) {
+                surveyResults[bottleId]++;
+            } else {
+                surveyResults[bottleId] = 1;
+            }
+            
+            // 保存结果到本地存储
+            localStorage.setItem('surveyResults', JSON.stringify(surveyResults));
+        }
+        
+        // 加载结果
+        function loadResults() {
+            const savedResults = localStorage.getItem('surveyResults');
+            surveyResults = savedResults ? JSON.parse(savedResults) : {};
+        }
+        
+        // 显示结果
+        function showResults() {
+            questionsContainer.classList.add('hidden');
+            resultsPage.classList.remove('hidden');
+            
+            // 从本地存储加载用户选择
+            const userChoices = [];
+            for (let i = 0; i < 10; i++) {
+                const choice = localStorage.getItem(`question_${i}`);
+                if (choice && selectedBottles[i]) {
+                    userChoices.push(selectedBottles[i][choice]);
+                }
+            }
+            
+            // 显示用户结果
+            const userResultsEl = document.getElementById('user-results');
+            userResultsEl.innerHTML = '';
+            
+            if (userChoices.length > 0) {
+                // 计算用户最喜爱的类型
+                const favoriteTypes = {};
+                userChoices.forEach(bottle => {
+                    const type = bottle.name.split(' ').pop();
+                    favoriteTypes[type] = (favoriteTypes[type] || 0) + 1;
+                });
+                
+                let favoriteType = '';
+                let maxCount = 0;
+                for (const type in favoriteTypes) {
+                    if (favoriteTypes[type] > maxCount) {
+                        maxCount = favoriteTypes[type];
+                        favoriteType = type;
+                    }
+                }
+                
+                userResultsEl.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4">
+                            <i class="fa fa-heart text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-lg font-medium">您的偏好分析</p>
+                            <p class="text-dark/70">您似乎偏爱<strong>${favoriteType}</strong>风格的香水瓶</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 pt-4">
+                        <p class="font-medium mb-2">您最喜爱的香水瓶:</p>
+                        <div class="bg-white rounded-lg p-3 shadow-sm">
+                            <img src="${userChoices[userChoices.length - 1].url}" alt="${userChoices[userChoices.length - 1].name}" class="w-full h-40 object-cover rounded">
+                            <p class="font-semibold mt-2">${userChoices[userChoices.length - 1].name}</p>
+                            <p class="text-dark/70 text-sm">${userChoices[userChoices.length - 1].description}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                userResultsEl.innerHTML = '<p>没有找到您的选择记录。</p>';
+            }
+            
+            // 显示整体结果
+            const overallResultsEl = document.getElementById('overall-results');
+            overallResultsEl.innerHTML = '';
+            
+            // 计算总投票数
+            let totalVotes = 0;
+            for (const id in surveyResults) {
+                totalVotes += surveyResults[id];
+            }
+            
+            // 按投票数排序
+            const sortedResults = Object.entries(surveyResults)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5); // 只显示前5名
+            
+            if (sortedResults.length > 0) {
+                overallResultsEl.innerHTML = `
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4">
+                            <i class="fa fa-bar-chart text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-lg font-medium">最受欢迎的香水瓶</p>
+                            <p class="text-dark/70">基于${totalVotes}位用户的选择</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 pt-2">
+                        ${sortedResults.map(([id, votes], index) => {
+                            const bottle = bottleImages.find(b => b.id == id);
+                            const percentage = Math.round((votes / totalVotes) * 100);
+                            
+                            return `
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-medium">${bottle ? bottle.name : '未知香水瓶'}</span>
+                                        <span>${percentage}%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-primary h-2 rounded-full" style="width: ${percentage}%"></div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            } else {
+                overallResultsEl.innerHTML = '<p>暂无投票结果。</p>';
+            }
+        }
+        
+        // 重新开始调查
+        function restartSurvey() {
+            // 重置当前问题和选择
+            currentQuestion = 0;
+            selectedBottles = [];
+            
+            // 清除本地存储中的问题选择
+            for (let i = 0; i < 10; i++) {
+                localStorage.removeItem(`question_${i}`);
+            }
+            
+            // 显示欢迎页面
+            resultsPage.classList.add('hidden');
+            welcomePage.classList.remove('hidden');
+            
+            // 重置进度条
+            updateProgress();
+        }
+        
+        // 页面加载时初始化调查
+        document.addEventListener('DOMContentLoaded', initSurvey);
+    </script>
+
+
+    </body></html>
